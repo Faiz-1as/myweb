@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梁贤云，佐助zzz-个人网站</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+	font-family: 'Arial', sans-serif;
+	height: auto;         
+	overflow: auto;        
+
+}
+
+.container {
+display: flex;
+min-height: 100vh;
+}
+
+/* 左侧人物 - 科技风深蓝 */
+.person-left {
+flex: 1;
+background: linear-gradient(135deg, #0f1a3d 0%, #1c3f9e 100%);
+color: white;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 40px;
+position: relative;
+overflow: hidden;
+transition: all 0.5s ease;
+}
+
+/* 右侧人物 - 活力橙紫 */
+.person-right {
+flex: 1;
+background: linear-gradient(135deg, #ff7b45 0%, #d9287a 100%);
+color: white;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 40px;
+position: relative;
+overflow: hidden;
+transition: all 0.5s ease;
+}
+
+.person-left:hover, .person-right:hover {
+transform: scale(1.02);
+box-shadow: inset 0 0 50px rgba(255,255,255,0.2);
+}
+
+.avatar {
+width: 200px;
+height: 200px;
+border-radius: 50%;
+border: 5px solid rgba(255,255,255,0.3);
+margin-bottom: 30px;
+object-fit: cover;
+transition: all 0.3s ease;
+box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.avatar:hover {
+transform: scale(1.1);
+border-color: rgba(255,255,255,0.6);
+box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+h1 {
+font-size: 2.5em;
+margin-bottom: 10px;
+text-align: center;
+text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+letter-spacing: 1px;
+}
+
+.title {
+font-size: 1.3em;
+margin-bottom: 20px;
+opacity: 0.85;
+text-align: center;
+font-weight: 300;
+}
+
+.bio {
+text-align: center;
+max-width: 400px;
+line-height: 1.7;
+margin-bottom: 30px;
+font-size: 1.1em;
+opacity: 0.9;
+}
+
+.social-links {
+display: flex;
+gap: 20px;
+margin-top: 20px;
+}
+
+.social-links a {
+color: white;
+font-size: 1.8em;
+transition: all 0.3s ease;
+text-decoration: none;
+display: inline-block;
+}
+
+.social-links a:hover {
+transform: translateY(-5px);
+text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.skills {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: 20px;
+justify-content: center;
+}
+
+.skill-tag {
+background: rgba(255,255,255,0.15);
+padding: 8px 18px;
+border-radius: 25px;
+font-size: 0.9em;
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.2);
+transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+background: rgba(255,255,255,0.25);
+transform: translateY(-2px);
+}
+
+/* 分割线 */
+.divider {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+width: 4px;
+height: 80%;
+background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5), transparent);
+z-index: 10;
+border-radius: 2px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+.container {
+flex-direction: column;
+}
+.divider {
+display: none;
+}
+.person-left, .person-right {
+padding: 20px;
+display: flex;
+flex-direction: column; 
+}
+h1 {
+font-size: 2em;
+}
+.avatar {
+width: 150px;
+height: 150px;
+}
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.person-left > *, .person-right > * {
+animation: fadeIn 0.8s ease-out forwards;
+}
+
+.person-left h1 { animation-delay: 0.1s; }
+.person-left .title { animation-delay: 0.2s; }
+.person-left .avatar { animation-delay: 0s; }
+.person-left .bio { animation-delay: 0.3s; }
+.person-left .skills { animation-delay: 0.4s; }
+.person-left .social-links { animation-delay: 0.5s; }
+
+.person-right h1 { animation-delay: 0.1s; }
+.person-right .title { animation-delay: 0.2s; }
+.person-right .avatar { animation-delay: 0s; }
+.person-right .bio { animation-delay: 0.3s; }
+.person-right .skills { animation-delay: 0.4s; }
+.person-right .social-links { animation-delay: 0.5s; }
+
+/* 添加科技元素 */
+.tech-element {
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+pointer-events: none;
+opacity: 0.1;
+background-image:
+radial-gradient(circle at 10% 20%, rgba(255,255,255,0.2) 0%, transparent 20%),
+radial-gradient(circle at 90% 80%, rgba(255,255,255,0.2) 0%, transparent 20%);
+}
+
+.person-right .tech-element {
+background-image:
+radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2) 0%, transparent 25%),
+radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 25%);
+}
+input:focus{
+	outline: 1px solid #cfcfcf;
+}
+.PandS{
+	display: flex;
+	gap: 10px;
+	/* margin: 5px; */
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.PandS_left{
+	flex:1;
+	border-radius: 3%;
+	border: 0;
+}
+.PandS_right{
+	color: white;
+	background-color: skyblue;
+	border-radius: 5%;
+	border: 0;
+/* 	padding:10px; */
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 60px;
+}
+.comment{
+	margin-top: 20px;
+	padding: 15px;
+	background-color: rgba(188, 188, 188, 0.2);
+	border-radius: 3px;
+	width: 100%;
+	letter-spacing: 4px;
+	box-shadow:
+	    /* inset 0 0  8px 1px rgba(255, 255, 255, 0.5),
+	    inset 0 0 20px 4px rgba(255, 255, 255, 0.3), */
+	    inset 0 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+.comments{
+	border: #cfcfcf 1px solid;
+	padding: 5px;
+	margin-top: 10px;
+	border-radius: 2px;
+}
+
+.info {
+  flex: 0 0 50vh;           /* 不放大、不缩小、占 50vh */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.comment-area {
+  flex: 1;                  /* 占剩余全部 */
+  overflow-y: auto;         /* 留言多就出现滚动条 */
+  display: flex;
+  align-items: flex-start;  /* 让留言板贴顶 */
+  padding: 20px;
+  width:80%;
+}
+.comment { font-size: 0; }   /* 让空白字符不占高 */
+.comment > * { font-size: initial; } /* 子元素恢复字号 */
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="divider"></div>
+	<!-- 左侧人物 -->
+	<div class="person-left">
+		<div class="tech-element"></div>
+		<div class="info">
+			<img src="https://h537.xyz/api/get_user_img/6" alt="张三" class="avatar">
+			<h1>佐助zzz</h1>
+			<p class="title">前端开发工程师</p>
+			<p class="bio">
+			热爱编程，专注于创造优雅的用户界面。擅长将设计转化为代码，追求完美的用户体验。相信技术可以改变世界。
+			</p>
+			<div class="skills">
+				<span class="skill-tag">JavaScript</span>
+				<span class="skill-tag">React</span>
+				<span class="skill-tag">Vue</span>
+				<span class="skill-tag">CSS3</span>
+				<span class="skill-tag">Node.js</span>
+			</div>
+			<div class="social-links">
+				<a href="#" title="GitHub">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+					</svg>
+				</a>
+				<a href="#" title="LinkedIn">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+					</svg>
+				</a>
+				<a href="#" title="邮箱">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+		
+		<div class="comment-area">
+			<div class="comment">
+				<div style="color: ghostwhite;font-size: 20px;font-weight: bold;" id="title">留言板</div>
+					<div class="PandS">
+						<input class="PandS_left" id="txt1" placeholder="说点什么…" />
+						<button onclick="send1()" class="PandS_right">发送</button>
+					</div>
+					<div>留言列表</div>
+					<div id="list1" class="comments">加载中…</div>
+			</div>
+		</div>
+		
+	</div>
+	
+<!-- 右侧人物 -->
+	<div class="person-right">
+		<div class="tech-element">
+		</div>
+		<div class="info">
+			<img src="https://h537.xyz/api/get_user_img/10" alt="李四" class="avatar">
+			<h1>梁贤云</h1>
+			<p class="title">后端开发工程师</p>
+			<p class="bio">
+			我们筑巢于云端，以代码为砖石，搭建稳健、高效的服务体系；让每一次点击、每一条数据，都在毫秒间精准流转。
+			</p>
+			<div class="skills">
+				<span class="skill-tag">SpringBoot</span>
+				<span class="skill-tag">MySQL</span>
+				<span class="skill-tag">IDEA</span>
+				<span class="skill-tag">Java</span>
+			</div>
+			<div class="social-links">
+				<a href="#" title="Dribbble">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M12 24c-6.628 0-12-5.373-12-12 0-6.628 5.372-12 12-12s12 5.372 12 12c0 6.627-5.372 12-12 12zm-1.548-23.028c-5.649.795-10.082 5.649-9.985 11.499.097 5.849 5.456 10.457 11.299 10.457 1.505 0 2.948-.3 4.282-.853-.653-.9-1.251-1.851-1.784-2.851-1.336.4-2.723.6-4.161.6-4.161 0-7.796-2.7-9.085-6.499 1.336-2.2 3.544-3.849 6.085-4.4.097-.3.291-.9.388-1.2zm1.941-1.099c.097 0 .194 0 .388.1 4.941 1.5 8.475 5.849 8.475 11.099 0 .3 0 .6-.097.9-.291 0-.582-.1-.873-.1-.097-.3-.194-.6-.291-.9-1.069-3.6-3.738-6.6-7.113-8.099.097.3.194.6.291.9-1.455-.6-2.91-1.1-4.456-1.4-.388-.3-.679-.6-1.164-.8.097-.1.194-.1.291-.1.097.1.291.1.485.1-.097-.1-.194-.1-.291-.1zm-2.329 2.199c1.65.3 3.25.8 4.796 1.4-1.164.6-2.329 1.5-3.25 2.6-.679-.9-1.261-1.9-1.65-3zm-1.358 19.427c.097-.3.194-.6.291-.9 1.164 2.2 3.058 4 5.456 4.9.291.1.582.3.873.4-.097.1-.194.1-.388.2-3.445 1.3-7.307.3-9.906-2.2 1.164-.9 2.424-1.8 3.674-2.5zm14.892-11.499c.097.3.194.6.291.9.291 2.2.097 4.4-.679 6.4-.097-.3-.194-.6-.291-.9-.582-1.9-1.65-3.6-3.058-5.1.097.3.194.6.291.9-.097-.3-.194-.6-.291-1-1.941-2.4-4.553-4-7.502-4.5.097.3.194.6.291.9 3.445.6 6.393 2.5 8.334 5.3zm-13.344 5.7c1.65.9 3.445 1.4 5.359 1.4 1.455 0 2.91-.3 4.265-.9-.097.3-.194.6-.291.9-1.941 1.1-4.069 1.7-6.296 1.7-1.65 0-3.25-.4-4.699-1.1.194-.4.388-.8.582-1.2zm-2.329-10.999c.097.3.194.6.291.9-1.455-.3-2.91-.4-4.359-.4h-.679c.097-.3.194-.6.291-.9.097-.3.194-.6.291-.9 1.65 0 3.3.2 4.941.6-.291.3-.485.7-.485 1.1z"/>
+					</svg>
+				</a>
+				<a href="#" title="Behance">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
+					</svg>
+				</a>
+				<a href="#" title="邮箱">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+		<div class="comment-area">
+			<div class="comment" style="background-color: rgba(188,188,188,0.2);">
+				<div style="color: ghostwhite;font-size: 20px;font-weight: bold;" id="title2" >留言板</div>
+				<div class="PandS">
+					<input class="PandS_left" id="txt2" placeholder="说点什么…" />
+					<button onclick="send2()" class="PandS_right" style="background-color: #ff7b45;">发送</button>
+				</div>
+				<div>留言列表</div>
+				<div id="list2" class="comments">加载中…</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<script>
+	const SEND_API = 'https://h537.xyz/api/web/sendMessage'; // ← 换成你的真实地址
+    // 拉取留言
+    function load1(){
+		const GET_API = 'https://h537.xyz/api/web/getMessage?belong=1'; 
+		fetch(GET_API)
+			.then(r=>r.json())
+			.then(arr=>{
+			  list1.innerHTML = arr.length
+				? arr.map(m=>`<div>${m.text}<small>———${m.time}</small></div>`).join('<br>')
+				: '暂无留言';
+			})
+			.catch(err=>list.innerText='加载失败：'+err);
+    }
+	function load2(){
+		const GET_API = 'https://h537.xyz/api/web/getMessage?belong=2';
+		fetch(GET_API)
+			.then(r=>r.json())
+			.then(arr=>{
+			  list2.innerHTML = arr.length
+				? arr.map(m=>`<div>${m.text}<small>———${m.time}</small></div>`).join('<br>')
+				: '暂无留言';
+			})
+			.catch(err=>list.innerText='加载失败：'+err);
+	}
+    // 发送留言
+    function send1(){
+      const text = txt1.value.trim();
+      if(!text) return;
+      fetch(SEND_API,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({text,belong:1})
+      })
+      .then(r=>r.text())
+      .then(()=>{txt1.value=''; load1();})
+      .catch(err=>alert('发送失败：'+err));
+    }
+	function send2(){
+	  const text = txt2.value.trim();
+	  if(!text) return;
+	  fetch(SEND_API,{
+	    method:'POST',
+	    headers:{'Content-Type':'application/json'},
+	    body: JSON.stringify({text,belong:2})
+	  })
+	  .then(r=>r.text())
+	  .then(()=>{txt2.value=''; load2();})
+	  .catch(err=>alert('发送失败：'+err));
+	}
+    // 初始化
+    load1();
+	load2();
+	document.getElementById('txt1').addEventListener('keydown', function (e) {
+	    if (e.key === 'Enter') {    // 也可以用 e.keyCode === 13
+	        e.preventDefault();       // 阻止默认换行
+	        send1();                  // 执行发送
+	    }
+	});
+	document.getElementById('txt2').addEventListener('keydown', function (e) {
+	    if (e.key === 'Enter') {    // 也可以用 e.keyCode === 13
+	        e.preventDefault();       // 阻止默认换行
+	        send2();                  // 执行发送
+	    }
+	});
+	const title = document.getElementById('title');
+	const title2 = document.getElementById('title2');
+	const comments = document.querySelectorAll('.comments');
+	let hue = 0;                       // 色相 0~360
+	let dir = 1;          // 1 表示增加，-1 表示减少
+	let alpha = 0;        // 0 → 1 → 0
+	setInterval(() => {
+	    hue = (hue + 2) % 360;           // 每 50ms 加 2°，可自行调速度
+	    title.style.color = `hsl(${hue} 80% 80%)`;
+		title2.style.color = `hsl(${hue} 80% 80%)`;
+	}, 50);
+	comments.forEach(comment => {
+		setInterval(() => {
+			comment.style.color = `hsl(${hue} 80% 80%)`;
+			alpha += 0.01 * dir;        // 步长 0.01，可自己调
+			if (alpha >= 1) { alpha = 1; dir = -1; }
+			if (alpha <= 0) { alpha = 0; dir =  1; }
+			comment.style.border = `2px solid rgba(207, 207, 207,${alpha})`
+		}, 50);
+	});
+	
+	// 添加鼠标悬停效果
+	document.querySelectorAll('.person-left, .person-right').forEach(person => {
+		person.addEventListener('mouseenter', function() {
+		this.style.transform = 'scale(1.02)';
+		this.style.zIndex = '5';
+		});
+		person.addEventListener('mouseleave', function() {
+		this.style.transform = 'scale(1)';
+		this.style.zIndex = '1';
+		});
+	});
+	
+	// 添加技能标签点击效果
+	document.querySelectorAll('.skill-tag').forEach(tag => {
+		tag.addEventListener('click', function() {
+		this.style.transform = 'scale(1.1)';
+		setTimeout(() => {
+		this.style.transform = 'scale(1)';
+		}, 200);
+		});
+	});
+	
+	// 添加头像点击效果
+	document.querySelectorAll('.avatar').forEach(avatar => {
+		avatar.addEventListener('click', function() {
+		this.style.transform = 'rotate(360deg) scale(1.1)';
+		setTimeout(() => {
+		this.style.transform = 'rotate(0deg) scale(1)';
+		}, 600);
+		});
+	});
+	
+	// 添加键盘导航
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'ArrowLeft') {
+		document.querySelector('.person-left').scrollIntoView({ behavior: 'smooth' });
+		} else if (e.key === 'ArrowRight') {
+		document.querySelector('.person-right').scrollIntoView({ behavior: 'smooth' });
+		}
+	});
+	document.addEventListener('keydown', e => {
+	  if (e.key === 'ArrowLeft')
+	    document.querySelector('.person-left').scrollIntoView({behavior:'smooth'});
+	  if (e.key === 'ArrowRight')
+	    document.querySelector('.person-right').scrollIntoView({behavior:'smooth'});
+	});
+</script>
+</body>
+</html>
